@@ -22,6 +22,11 @@ jobs:
     steps:
     - name: Environmental variables
       run: |
+        if [[ ("${{ github.event_name }}" = "workflow_dispatch" ) ]]; then
+          ROSDISTRO_TAG="${{ github.event.inputs.tag }}"
+        else
+          ROSDISTRO_TAG="${{ github.ref_name }}"
+        fi
         ROSDISTRO_TAG=${{ github.ref_name }}
         echo "ROSDISTRO_TAG=${ROSDISTRO_TAG}" >> $GITHUB_ENV
         echo "ROSDISTRO_TARGET=${ROSDISTRO_TAG%%/*}" >> $GITHUB_ENV
