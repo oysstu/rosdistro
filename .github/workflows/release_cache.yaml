@@ -31,6 +31,8 @@ jobs:
         echo "ROSDISTRO_TARGET=${ROSDISTRO_TAG%%/*}" >> $GITHUB_ENV
         echo "ROSDISTRO_RELEASE=${ROSDISTRO_TAG#*/}" >> $GITHUB_ENV
     - uses: actions/checkout@v4
+      with:
+        ref: ${{ env.ROSDISTRO_TAG }}
     - uses: actions/setup-python@v5
     - run: pip install rosdistro
     - run: |
